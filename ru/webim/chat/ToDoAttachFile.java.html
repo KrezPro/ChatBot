@@ -1,0 +1,52 @@
+<html>
+<head>
+<title>ToDoAttachFile.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cc7832;}
+.s1 { color: #a9b7c6;}
+.s2 { color: #6a8759;}
+.s3 { color: #6897bb;}
+.s4 { color: #808080;}
+</style>
+</head>
+<body bgcolor="#2b2b2b">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+ToDoAttachFile.java</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span><span class="s1">ru.webim.chat</span><span class="s0">;</span>
+
+import <span class="s1">com.codeborne.selenide.Configuration</span><span class="s0">;</span>
+import <span class="s1">org.junit.Test</span><span class="s0">;</span>
+import <span class="s1">org.openqa.selenium.By</span><span class="s0">;</span>
+
+import <span class="s1">java.io.File</span><span class="s0">;</span>
+
+import static <span class="s1">com.codeborne.selenide.Condition.disappear</span><span class="s0">;</span>
+import static <span class="s1">com.codeborne.selenide.Selenide.$</span><span class="s0">;</span>
+import static <span class="s1">com.codeborne.selenide.Selenide.open</span><span class="s0">;</span>
+
+public class <span class="s1">ToDoAttachFile {</span>
+
+
+    @Test
+    <span class="s0">public void </span><span class="s1">testAttachFile() {</span>
+
+        open(<span class="s2">&quot;http://cen.meckemerovo.ru/TestBot/&quot;</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">$(</span><span class="s2">&quot;.webim-html-button-element&quot;</span><span class="s1">).click()</span><span class="s0">;</span>
+        <span class="s1">$(</span><span class="s2">&quot;.scroll-content &gt; div:nth-child(1) &gt; div:nth-child(1) &gt; label:nth-child(1) &gt; input:nth-child(2)&quot;</span><span class="s1">).setValue(</span><span class="s2">&quot;Александр&quot;</span><span class="s1">).pressEnter()</span><span class="s0">;</span>
+        <span class="s1">$(</span><span class="s2">&quot;.scroll-content &gt; div:nth-child(1) &gt; div:nth-child(2) &gt; label:nth-child(1) &gt; input:nth-child(2)&quot;</span><span class="s1">).setValue(</span><span class="s2">&quot;89137585529&quot;</span><span class="s1">).pressEnter()</span><span class="s0">;</span>
+        <span class="s1">$(</span><span class="s2">&quot;.scroll-content &gt; div:nth-child(1) &gt; div:nth-child(3) &gt; label:nth-child(1) &gt; input:nth-child(2)&quot;</span><span class="s1">).setValue(</span><span class="s2">&quot;bannov.all@mail.ru&quot;</span><span class="s1">).pressEnter()</span><span class="s0">;</span>
+        <span class="s1">$(</span><span class="s2">&quot;.scroll-content &gt; div:nth-child(2) &gt; label:nth-child(1) &gt; textarea:nth-child(2)&quot;</span><span class="s1">).setValue(</span><span class="s2">&quot;Помогите&quot;</span><span class="s1">).pressEnter()</span><span class="s0">;</span>
+        <span class="s1">$(</span><span class="s2">&quot;input.webim-fileupload:nth-child(1)&quot;</span><span class="s1">).uploadFile(</span><span class="s0">new </span><span class="s1">File(</span><span class="s2">&quot;C:/XML/XML.pdf&quot;</span><span class="s1">))</span><span class="s0">;</span>
+
+        <span class="s1">Configuration.timeout = </span><span class="s3">100000</span><span class="s0">; </span><span class="s4">//увеличиваем время таймаута с 4 с до 100 чтобы дождаться загрузки файла (пропадает селектор загрузки)</span>
+        <span class="s1">$(</span><span class="s2">&quot;.webim-attached-file&quot;</span><span class="s1">).should(disappear)</span><span class="s0">;</span>
+        <span class="s1">$(</span><span class="s2">&quot;div.webim-processing-personal-data-block:nth-child(5) &gt; label:nth-child(1) &gt; svg:nth-child(2)&quot;</span><span class="s1">).doubleClick()</span><span class="s0">;</span>
+        <span class="s1">$(</span><span class="s2">&quot;button.webim-btn-send:nth-child(2)&quot;</span><span class="s1">).doubleClick()</span><span class="s0">;</span>
+    <span class="s1">}</span>
+}</pre>
+</body>
+</html>
